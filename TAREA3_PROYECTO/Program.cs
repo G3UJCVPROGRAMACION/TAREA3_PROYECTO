@@ -199,10 +199,11 @@ namespace TAREA3_PROYECTO
             WriteLine("Matriz:");
             Enumerable.Range(0, 3).ToList().ForEach(i =>
             {
-                Enumerable.Range(0, 3).ToList().ForEach(j => Write(matriz[i, j] + "	"));
+                Enumerable.Range(0, 3).ToList().ForEach(j => WriteLine($"Elemento {i + 1} Posicion {i},{j}  {matriz[i, j]}" ));
                 WriteLine();
             });
-        }
+
+        }       
     }
 
     //ARREGLOS PARA APROVACION DE PROYECTO
