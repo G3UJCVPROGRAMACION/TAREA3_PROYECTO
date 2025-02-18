@@ -14,7 +14,7 @@ namespace TAREA3_PROYECTO
         static bool matrizLlena = false;
         static void Main(string[] args )
         {
-            int opcion;
+            int opcion = 0;
 
             do
             {
@@ -42,7 +42,10 @@ namespace TAREA3_PROYECTO
                 }
                 catch (FormatException ex)
                 {
-                    WriteLine("Entrada inválida. Presione cualquier tecla para continuar.");
+                    WriteLine(ex.Message);
+                    WriteLine(ex.StackTrace);
+                    WriteLine(ex.ToString());
+                    WriteLine("Entrada inválida, Usted deberia ingresar un numero entero. Presione cualquier tecla para continuar.");
                     ReadKey();
                     continue;
 
@@ -212,6 +215,8 @@ namespace TAREA3_PROYECTO
 
 }
     
+
+
 
 
 
