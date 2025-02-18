@@ -10,9 +10,11 @@ namespace TAREA3_PROYECTO
     {
         static void Main(string[] args)
         {
+
+
             //ARREGLOS PARA APROVACION DE PROYECTO
 
-            int[] numeros = new int[7];
+            /*int[] numeros = new int[7];
             Console.WriteLine("Ingrese 7 numeros enteros: ");
             for (int i = 0; i < 7; i++)
             {
@@ -39,7 +41,7 @@ namespace TAREA3_PROYECTO
                 }
             }
 
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
     }
 }
