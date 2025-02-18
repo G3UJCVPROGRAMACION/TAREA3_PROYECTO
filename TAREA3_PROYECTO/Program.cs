@@ -26,13 +26,15 @@ namespace TAREA3_PROYECTO
                 WriteLine("4. Agregar datos a la matriz");
                 WriteLine("5. Visualizar la matriz");
                 WriteLine("6. Imprimir una posición de la matriz");
-                WriteLine("7. Salir");
+                WriteLine("7. Imprimir todo el arreglo");
+                WriteLine("8. Imprimir toda la matriz");
+                WriteLine("9. Salir");
                 Write("Seleccione una opción: ");
 
                 try
                 {
                     opcion = int.Parse(ReadLine());
-                    if (opcion < 1 || opcion > 7)
+                    if (opcion < 1 || opcion > 9)
                     {
                         WriteLine("Opción fuera de rango. Presione cualquier tecla para continuar.");
                         ReadKey();
@@ -72,12 +74,18 @@ namespace TAREA3_PROYECTO
                         ImprimirElementoMatriz();
                         break;
                     case 7:
+                        ImprimirTodoArreglo();
+                        break;
+                    case 8:
+                        ImprimirTodoMatriz();
+                        break;
+                    case 9:
                         WriteLine("Saliendo...");
                         break;
                 }
                 WriteLine("Presione cualquier tecla para continuar...");
                 ReadKey();
-            } while (opcion != 7);
+            } while (opcion != 9);
         }
         static void AgregarArreglo()
         {
@@ -178,6 +186,22 @@ namespace TAREA3_PROYECTO
             {
                 WriteLine("Entrada inválida.");
             }
+        }
+        static void ImprimirTodoArreglo()
+        {
+            if (!arregloLleno) { WriteLine("El arreglo aún no tiene datos."); return; }
+            WriteLine("Arreglo:");
+            Enumerable.Range(0, numeros.Length).ToList().ForEach(i => WriteLine($"Elemento {i}: {numeros[i]}"));
+        }
+        static void ImprimirTodoMatriz()
+        {
+            if (!matrizLlena) { WriteLine("La matriz aún no tiene datos."); return; }
+            WriteLine("Matriz:");
+            Enumerable.Range(0, 3).ToList().ForEach(i =>
+            {
+                Enumerable.Range(0, 3).ToList().ForEach(j => Write(matriz[i, j] + "	"));
+                WriteLine();
+            });
         }
     }
 
