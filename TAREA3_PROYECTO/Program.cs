@@ -3,244 +3,192 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;    
+using static System.Console;
 
 namespace TAREA3_PROYECTO
 {
     internal class Program
     {
-        static int[] numeros = new int[7];
-        static int[,] matriz = new int[3, 3];
-        static bool arregloLleno = false;
-        static bool matrizLlena = false;
-        static void Main(string[] args )
-        {
-            int opcion = 0;
+        static string[][] clientes = new string[100][];
+        static string[][] boletos = new string[100][];
+        static string[][] reservas = new string[100][];
+        static string[][] espacios = new string[100][];
+        static string[][] facturas = new string[100][];
 
-            do
+        static int contadorClientes = 0;
+        static int contadorBoletos = 0;
+        static int contadorReservas = 0;
+        static int contadorEspacios = 0;
+        static int contadorFacturas = 0;
+
+        static void Main(string[] args)
+        {
+            while (true)
             {
                 Clear();
-                WriteLine("--- MENÚ ---");
-                WriteLine("1. Agregar datos al arreglo");
-                WriteLine("2. Visualizar el arreglo");
-                WriteLine("3. Imprimir una posición del arreglo");
-                WriteLine("4. Agregar datos a la matriz");
-                WriteLine("5. Visualizar la matriz");
-                WriteLine("6. Imprimir una posición de la matriz");
-                WriteLine("7. Imprimir todo el arreglo");
-                WriteLine("8. Imprimir toda la matriz");
-                WriteLine("9. Salir");
-                Write("Seleccione una opción: ");
+                WriteLine("Bienvenido al sistema de reservas de boletos de cine");
+                WriteLine("Seleccione una opción:");
+                WriteLine("1. Clientes");
+                WriteLine("2. Boletos");
+                WriteLine("3. Reservas");
+                WriteLine("4. Espacios");
+                WriteLine("5. Facturas");
+                WriteLine("6. Salir");
+                WriteLine("Ingrese el número de la opción deseada:");
 
                 try
                 {
-                    opcion = int.Parse(ReadLine());
-                    if (opcion < 1 || opcion > 9)
+                    int opcion = int.Parse(ReadLine());
+                    switch (opcion)
                     {
-                        WriteLine("Opción fuera de rango. Presione cualquier tecla para continuar.");
-                        ReadKey();
-                        continue;
-
-                    }
-                }
-                catch (FormatException ex)
-                {
-                    WriteLine(ex.Message);
-                    WriteLine(ex.StackTrace);
-                    WriteLine(ex.ToString());
-                    WriteLine("Entrada inválida, Usted deberia ingresar un numero entero. Presione cualquier tecla para continuar.");
-                    ReadKey();
-                    continue;
-
-                }
-
-                switch (opcion)
-                {
-                    case 1:
-                        AgregarArreglo();
-                        break;
-                    case 2:
-                        VisualizarArreglo();
-                        break;
-                    case 3:
-                        ImprimirElementoArreglo();
-                        break;
-                    case 4:
-                        AgregarMatriz();
-                        break;
-                    case 5:
-                        VisualizarMatriz();
-                        break;
-                    case 6:
-                        ImprimirElementoMatriz();
-                        break;
-                    case 7:
-                        ImprimirTodoArreglo();
-                        break;
-                    case 8:
-                        ImprimirTodoMatriz();
-                        break;
-                    case 9:
-                        WriteLine("Saliendo...");
-                        break;
-                }
-                WriteLine("Presione cualquier tecla para continuar...");
-                ReadKey();
-            } while (opcion != 9);
-        }
-        static void AgregarArreglo()
-        {
-            WriteLine("Ingrese 7 números enteros:");
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                while (true)
-                {
-                    Write($"Número {i + 1}: ");
-                    try
-                    {
-                        numeros[i] = int.Parse(ReadLine());
-                        break;
-                    }
-                    catch (FormatException ex)
-                    {
-                        WriteLine("Valor inválido. Ingrese un número entero.");
-                    }
-                }
-            }
-            arregloLleno = true;
-        }
-        static void VisualizarArreglo()
-        {
-            if (!arregloLleno) { WriteLine("El arreglo aún no tiene datos."); return; }
-            Write("Arreglo: ");
-            numeros.ToList().ForEach(num => Write(num + " "));
-            WriteLine();
-        }
-
-        static void ImprimirElementoArreglo()
-        {
-            if (!arregloLleno) { WriteLine("El arreglo aún no tiene datos."); return; }
-            Write("Ingrese la posición a imprimir (0-6): ");
-            try
-            {
-                int pos = int.Parse(ReadLine());
-                if (pos >= 0 && pos < numeros.Length)
-                    WriteLine($"Valor en la posición {pos}: {numeros[pos]}");
-                else
-                    WriteLine("Posición inválida.");
-            }
-            catch (FormatException ex)
-            {
-                WriteLine("Entrada inválida.");
-            }
-        }
-        static void AgregarMatriz()
-        {
-            WriteLine("Ingrese los valores de la matriz 3x3:");
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    while (true)
-                    {
-                        Write($"Elemento [{i},{j}]: ");
-                        try
-                        {
-                            matriz[i, j] = int.Parse(ReadLine());
+                        case 1:
+                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
                             break;
-                        }
-                        catch (FormatException ex)
-                        {
-                            WriteLine("Valor inválido. Ingrese un número entero.");
-                        }
+                        case 2:
+                            GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Ciudad de Ubicacion" });
+                            break;
+                        case 3:
+                            GestionarArreglo(reservas, ref contadorReservas, "Reservas", new string[] { "Numero de Reserva", "Numero de Boleto", "Numero de Cliente", "Nombre de Cliente", "Fecha de la Reserva", "Hora de la Reserva", "Ciudad de Ubicacion" });
+                            break;
+                        case 4:
+                            GestionarArreglo(espacios, ref contadorEspacios, "Espacios", new string[] { "Numero de Sala", "Tipo de Sala", "Capacidad de la Sala", "Disponibilidad de la Sala", "Numero de Asiento", "Estado del Asiento", "Ciudad de Ubicacion" });
+                            break;
+                        case 5:
+                            GestionarArreglo(facturas, ref contadorFacturas, "Facturas", new string[] { "Numero de Factura", "Numero de Reserva", "Numero de Cliente", "Nombre de Cliente", "Fecha de la Factura", "Hora de la Factura", "Ciudad de Ubicacion" });
+                            break;
+                        case 6:
+                            return;
+                        default:
+                            WriteLine("Opción no válida");
+                            break;
+
                     }
                 }
+                catch (FormatException)
+                {
+                    WriteLine("Opción no válida. Se debe ingresar un numero valido ");
+                }
+                catch (Exception ex)
+                {
+                    WriteLine($"Error inesperado: {ex.Message}");
+                }
             }
-            matrizLlena = true;
         }
-        static void VisualizarMatriz()
+        static void GestionarArreglo(string[][] arreglo, ref int contador, string nombreArreglo, string[] campos)
         {
-            if (!matrizLlena) { WriteLine("La matriz aún no tiene datos."); return; }
-            WriteLine("Matriz:");
-            Enumerable.Range(0, 3).ToList().ForEach(i =>
+            while (true)
             {
-                Enumerable.Range(0, 3).ToList().ForEach(j => Write(matriz[i, j] + "	"));
-                WriteLine();
-            });
-
+                WriteLine($"Gestión de {nombreArreglo}");
+                WriteLine("Seleccione una opción:");
+                WriteLine("1. Agregar");
+                WriteLine("2. Visualizar");
+                WriteLine("3. Imprimir posicion");
+                WriteLine("4. Regresar");
+                WriteLine("Ingrese el número de la opción deseada:");
+                try
+                {
+                    int opcion = int.Parse(ReadLine());
+                    switch (opcion)
+                    {
+                        case 1:
+                            AgregarElemento(arreglo, ref contador, campos);
+                            break;
+                        case 2:
+                            VisualizarArreglo(arreglo, contador, campos);
+                            break;
+                        case 3:
+                            ImprimirPosicion(arreglo, ref contador, campos);
+                            break;
+                        case 4:
+                            return;
+                        default:
+                            WriteLine("Opción no válida");
+                            break;
+                    }
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Opción no válida. Se debe ingresar un numero valido ");
+                }
+                catch (Exception ex)
+                {
+                    WriteLine($"Error inesperado: {ex.Message}");
+                }
+            }
         }
-        static void ImprimirElementoMatriz()
+        static void AgregarElemento(string[][] arreglo, ref int contador, string[] campos)
         {
-            if (!matrizLlena) { WriteLine("La matriz aún no tiene datos."); return; }
+            if (contador >= arreglo.Length)
+            {
+                WriteLine("No se pueden agregar más elementos");
+                return;
+            }
+            string[] elemento = new string[campos.Length];
+            for (int i = 0; i < campos.Length; i++)
+            {
+                WriteLine($"Ingrese el valor para {campos[i]}: ");
+                elemento[i] = ReadLine();
+            }
+            arreglo[contador++] = elemento;
+            WriteLine("Elemento agregado correctamente");
+        }
+
+        static void VisualizarArreglo(string[][] arreglo, int contador, string[] campos)
+        {
+            if (contador == 0)
+            {
+                WriteLine("No hay elementos para visualizar");
+                return;
+            }
+            for (int i = 0; i < contador; i++)
+            {
+                WriteLine($"Elemento {i + 1}");
+                for (int j = 0; j < campos.Length; j++)
+                {
+                    WriteLine($"{campos[j]}: {arreglo[i][j]}");
+                }
+                WriteLine();
+            }
+        }
+
+        static void ImprimirPosicion(string[][] arreglo, ref int contador, string[] campos)
+        {
+            if (contador == 0)
+            {
+                WriteLine("No hay elementos para visualizar");
+                return;
+            }
+            WriteLine("Ingrese la posición del elemento a imprimir:");
             try
             {
-                Write("Ingrese fila (0-2): ");
-                int fila = int.Parse(ReadLine());
-                Write("Ingrese columna (0-2): ");
-                int col = int.Parse(ReadLine());
-                if (fila >= 0 && fila < 3 && col >= 0 && col < 3)
-                    WriteLine($"Valor en [{fila},{col}]: {matriz[fila, col]}");
+                int posicion = int.Parse(ReadLine());
+                if (posicion > 0 && posicion <= contador)
+                {
+                    posicion--;
+                    WriteLine($"Elemento {posicion + 1}: ");
+                    for (int j = 0; j < campos.Length; j++)
+                    {
+                        WriteLine($"{campos[j]}: {arreglo[posicion][j]}");
+                    }
+                }
                 else
-                    WriteLine("Posición inválida.");
+                {
+                    WriteLine("Posicion no Valida");
+                }
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
-                WriteLine("Entrada inválida.");
+                WriteLine("Posición no válida. Se debe ingresar un numero valido ");
             }
-        }
-        static void ImprimirTodoArreglo()
-        {
-            if (!arregloLleno) { WriteLine("El arreglo aún no tiene datos."); return; }
-            WriteLine("Arreglo:");
-            Enumerable.Range(0, numeros.Length).ToList().ForEach(i => WriteLine($"Elemento {i}: {numeros[i]}"));
-        }
-        static void ImprimirTodoMatriz()
-        {
-            if (!matrizLlena) { WriteLine("La matriz aún no tiene datos."); return; }
-            WriteLine("Matriz:");
-            Enumerable.Range(0, 3).ToList().ForEach(i =>
+            catch (Exception ex)
             {
-                Enumerable.Range(0, 3).ToList().ForEach(j => WriteLine($"Elemento {i + 1} Posicion {i},{j}  {matriz[i, j]}" ));
-                WriteLine();
-            });
+                WriteLine($"Error inesperado: {ex.Message}");
+            }
 
-        }       
-    }
-
-    //ARREGLOS PARA APROVACION DE PROYECTO
-
-    /*int[] numeros = new int[7];
-    Console.WriteLine("Ingrese 7 numeros enteros: ");
-    for (int i = 0; i < 7; i++)
-    {
-        numeros[i] = int.Parse(Console.ReadLine());
-    }
-    for (int i = 0; i < 7; i++)
-    {
-        Console.WriteLine($"Elemento {i + 1} Posicion {i} {numeros[i]}");
-    }
-    int[,] matriz = new int[3, 3];
-    Console.WriteLine("Ingrese 9 numeros enteros: ");
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            matriz[i, j] = int.Parse(Console.ReadLine());
         }
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            Console.WriteLine($"Elemento {i + 1} Posicion {i},{j} {matriz[i, j]}");
-        }
-    }
+    }      
 
-    Console.ReadLine();*/
-
-
-}
-    
+}   
 
 
 
