@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace TAREA3_PROYECTO
         static string[][] facturas = new string[100][];
 
         static int contadorClientes = 0;
-        static int contadorBoletos = 0;
+        static int contadorBoletos  = 0;
         static int contadorReservas = 0;
         static int contadorEspacios = 0;
         static int contadorFacturas = 0;
@@ -127,7 +128,29 @@ namespace TAREA3_PROYECTO
             for (int i = 0; i < campos.Length; i++)
             {
                 WriteLine($"Ingrese el valor para {campos[i]}: ");
-                elemento[i] = ReadLine();
+                string valor = ReadLine();
+
+                if (campos[i].Contains("Fecha"))
+                {
+                    if (!EsFechaValida(valor))
+                    {
+                        WriteLine("Fecha no válida. Ingrese la fecha en el formato dd/mm/yyyy");
+                        i--;
+                        continue;
+                    }
+
+                }
+                else if (campos[i].Contains("Hora"))
+                {
+
+                    if (!EsHoraValida(valor))
+                    {
+                        WriteLine("Hora no válida. Ingrese la hora en formato de 24 horas (hh:mm)");
+                        i--;
+                        continue;
+                    }
+                }   
+                elemento[i] = valor;
             }
             arreglo[contador++] = elemento;
             WriteLine("Elemento agregado correctamente");
@@ -186,7 +209,20 @@ namespace TAREA3_PROYECTO
             }
 
         }
-    }      
+
+        static bool EsFechaValida(string fecha)
+        {
+            DateTime result;
+            return DateTime.TryParseExact(fecha, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out result);
+
+        }
+        static bool EsHoraValida(string hora)
+        {
+            DateTime result;
+            return DateTime.TryParseExact(hora, "HH:mm", null, System.Globalization.DateTimeStyles.None, out result);
+        }
+    }   
+    
 
 }   
 
