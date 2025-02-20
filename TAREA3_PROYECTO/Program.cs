@@ -60,7 +60,7 @@ namespace TAREA3_PROYECTO
                         case 6:
                             return;
                         default:
-                            WriteLine("Opción no válida. Debes seleccionar un numero entre 0 y 6");
+                            WriteLine("Opción no válida. Debes seleccionar un numero entre 1 y 6");
                             break;
 
                     }
@@ -103,13 +103,13 @@ namespace TAREA3_PROYECTO
                         case 4:
                             return;
                         default:
-                            WriteLine("Opción no válida");
+                            WriteLine("Opción no válida.  Debes seleccionar un numero entre 1 y 4");
                             break;
                     }
                 }
                 catch (FormatException)
                 {
-                    WriteLine("Opción no válida. Se debe ingresar un numero valido ");
+                    WriteLine("Opción no válida. Se debe ingresar un numero entre 1 y 4 ");
                 }
                 catch (Exception ex)
                 {
@@ -195,12 +195,12 @@ namespace TAREA3_PROYECTO
                 }
                 else
                 {
-                    WriteLine("Posicion no Valida");
+                    WriteLine("Posicion no Valida o posicion aun NO tiene datos almacenados. Ingrese un numero entre 1 y 100 ");
                 }
             }
             catch (FormatException)
             {
-                WriteLine("Posición no válida. Se debe ingresar un numero valido ");
+                WriteLine("Posición no válida. Se debe ingresar un numero entero Positivo no mayor a 100 ");
             }
             catch (Exception ex)
             {
