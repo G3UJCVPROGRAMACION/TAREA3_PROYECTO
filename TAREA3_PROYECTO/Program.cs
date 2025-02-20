@@ -27,7 +27,7 @@ namespace TAREA3_PROYECTO
             while (true)
             {
                 Clear();
-                WriteLine("Bienvenido al sistema de reservas de boletos de cine");
+                WriteLine("Bienvenido al sistema de Boleteria de cine Permanencia Voluntaria");
                 WriteLine("Seleccione una opción:");
                 WriteLine("1. Clientes");
                 WriteLine("2. Boletos");
@@ -43,7 +43,7 @@ namespace TAREA3_PROYECTO
                     switch (opcion)
                     {
                         case 1:
-                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
+                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de DNI", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
                             break;
                         case 2:
                             GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Ciudad de Ubicacion" });
@@ -60,7 +60,7 @@ namespace TAREA3_PROYECTO
                         case 6:
                             return;
                         default:
-                            WriteLine("Opción no válida");
+                            WriteLine("Opción no válida. Debes seleccionar un numero entre 0 y 6");
                             break;
 
                     }
@@ -173,7 +173,6 @@ namespace TAREA3_PROYECTO
                 WriteLine();
             }
         }
-
         static void ImprimirPosicion(string[][] arreglo, ref int contador, string[] campos)
         {
             if (contador == 0)
@@ -209,7 +208,6 @@ namespace TAREA3_PROYECTO
             }
 
         }
-
         static bool EsFechaValida(string fecha)
         {
             DateTime result;
