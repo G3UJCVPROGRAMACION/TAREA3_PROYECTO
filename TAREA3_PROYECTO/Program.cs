@@ -8,13 +8,13 @@ namespace TAREA3_PROYECTO
 {
     internal class Program
     {
-        static string[][] clientes = new string[100][];
+        static string[][] clientes = new string[100][];//Arreglo tipo Matriz, variable clientes, inicializada en 100
         static string[][] boletos  = new string[100][];
         static string[][] reservas = new string[100][];
         static string[][] espacios = new string[100][];
         static string[][] facturas = new string[100][];
 
-        static int contadorClientes = 0;
+        static int contadorClientes = 0;//Contador de Variable clientes
         static int contadorBoletos  = 0;
         static int contadorReservas = 0;
         static int contadorEspacios = 0;
@@ -42,7 +42,7 @@ namespace TAREA3_PROYECTO
                     {
                         case 1:
                             GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de DNI", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
-                            break;
+                            break;//Llamado a la funcion GestionarArreglo
                         case 2:
                             GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Ciudad de Ubicacion" });
                             break;
@@ -65,7 +65,7 @@ namespace TAREA3_PROYECTO
                 }
                 catch (FormatException)
                 {
-                    WriteLine("Opción no válida. Se debe ingresar un numero valido ");
+                    WriteLine("Opción no válida. Se debe ingresar un numero entre 1 y 6. ");
                 }
                 catch (Exception ex)
                 {
@@ -73,7 +73,7 @@ namespace TAREA3_PROYECTO
                 }
             }
         }
-        static void GestionarArreglo(string[][] arreglo, ref int contador, string nombreArreglo, string[] campos)
+        static void GestionarArreglo(string[][] arreglo, ref int contador, string nombreArreglo, string[] campos)//Funcion GestionarArreglo
         {
             while (true)
             {
