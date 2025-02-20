@@ -9,13 +9,13 @@ namespace TAREA3_PROYECTO
     internal class Program
     {
         static string[][] clientes = new string[100][];
-        static string[][] boletos = new string[100][];
+        static string[][] boletos  = new string[100][];
         static string[][] reservas = new string[100][];
         static string[][] espacios = new string[100][];
         static string[][] facturas = new string[100][];
 
         static int contadorClientes = 0;
-        static int contadorBoletos = 0;
+        static int contadorBoletos  = 0;
         static int contadorReservas = 0;
         static int contadorEspacios = 0;
         static int contadorFacturas = 0;
@@ -220,36 +220,7 @@ namespace TAREA3_PROYECTO
 
     }
 
-    //ARREGLOS PARA APROVACION DE PROYECTO
-
-    /*int[] numeros = new int[7];
-    Console.WriteLine("Ingrese 7 numeros enteros: ");
-    for (int i = 0; i < 7; i++)
-    {
-        numeros[i] = int.Parse(Console.ReadLine());
-    }
-    for (int i = 0; i < 7; i++)
-    {
-        Console.WriteLine($"Elemento {i + 1} Posicion {i} {numeros[i]}");
-    }
-    int[,] matriz = new int[3, 3];
-    Console.WriteLine("Ingrese 9 numeros enteros: ");
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            matriz[i, j] = int.Parse(Console.ReadLine());
-        }
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            Console.WriteLine($"Elemento {i + 1} Posicion {i},{j} {matriz[i, j]}");
-        }
-    }
-
-    Console.ReadLine();*/
+    
 
 
 }
