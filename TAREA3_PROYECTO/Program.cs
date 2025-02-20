@@ -75,6 +75,9 @@ namespace TAREA3_PROYECTO
         }
         static void GestionarArreglo(string[][] arreglo, ref int contador, string nombreArreglo, string[] campos)//Funcion GestionarArreglo
         {
+            Func<string, bool> esNumeroValido = valor =>
+            { return int.TryParse(valor, out int numero); };//Funcion Lambda
+
             while (true)
             {
                 WriteLine($"Gestión de {nombreArreglo}");
@@ -90,7 +93,7 @@ namespace TAREA3_PROYECTO
                     switch (opcion)
                     {
                         case 1:
-                            AgregarElemento(arreglo, ref contador, campos);
+                            AgregarElemento(arreglo, ref contador, campos, esNumeroValido);
                             break;
                         case 2:
                             VisualizarArreglo(arreglo, contador, campos);
@@ -115,7 +118,7 @@ namespace TAREA3_PROYECTO
                 }
             }
         }
-        static void AgregarElemento(string[][] arreglo, ref int contador, string[] campos)
+        static void AgregarElemento(string[][] arreglo, ref int contador, string[] campos, Func<string, bool> esNumeroValido)
         {
             if (contador >= arreglo.Length)
             {
@@ -127,6 +130,17 @@ namespace TAREA3_PROYECTO
             {
                 WriteLine($"Ingrese el valor para {campos[i]}: ");
                 string valor = ReadLine();
+
+                if (campos[i].Contains("Numero"))
+                {
+                    if (!esNumeroValido(valor))
+                    {
+                        WriteLine("Caracter no válido. Debe ingresar un número entero");
+                        i--;
+                        continue;
+                    }
+
+                }
 
                 if (campos[i].Contains("Fecha"))
                 {
