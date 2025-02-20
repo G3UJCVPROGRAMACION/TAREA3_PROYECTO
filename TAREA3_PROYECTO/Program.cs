@@ -41,7 +41,7 @@ namespace TAREA3_PROYECTO
                     switch (opcion)
                     {
                         case 1:
-                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de DNI", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
+                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de Pin de 4 digitos", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
                             break;//Llamado a la funcion GestionarArreglo
                         case 2:
                             GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Ciudad de Ubicacion" });
