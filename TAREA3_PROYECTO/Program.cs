@@ -41,19 +41,19 @@ namespace TAREA3_PROYECTO
                     switch (opcion)
                     {
                         case 1:
-                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de Pin de 4 digitos", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Ciudad de Ubicacion" });
+                            GestionarArreglo(clientes, ref contadorClientes, "Clientes", new string[] { "Numero de Pin de identificacion", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Numero de Cliente", "Tipo de Cliente" });
                             break;//Llamado a la funcion GestionarArreglo
                         case 2:
-                            GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Ciudad de Ubicacion" });
+                            GestionarArreglo(boletos, ref contadorBoletos, "Boletos", new string[] { "Numero de Boleto", "Numero de Sala", "Numero de Asiento", "Numero de Pelicula", "Hora de la Funcion", "Fecha de la Funcion", "Tipo de Boleto" });
                             break;
                         case 3:
                             GestionarArreglo(reservas, ref contadorReservas, "Reservas", new string[] { "Numero de Reserva", "Numero de Boleto", "Numero de Cliente", "Nombre de Cliente", "Fecha de la Reserva", "Hora de la Reserva", "Ciudad de Ubicacion" });
                             break;
                         case 4:
-                            GestionarArreglo(espacios, ref contadorEspacios, "Espacios", new string[] { "Numero de Sala", "Tipo de Sala", "Capacidad de la Sala", "Disponibilidad de la Sala", "Numero de Asiento", "Estado del Asiento", "Ciudad de Ubicacion" });
+                            GestionarArreglo(espacios, ref contadorEspacios, "Espacios", new string[] { "Numero de Sala", "Tipo de Sala", "Capacidad de la Sala", "Disponibilidad de la Sala", "Numero de Asiento", "Estado del Asiento", "Cantidad de asientos Necesarios" });
                             break;
                         case 5:
-                            GestionarArreglo(facturas, ref contadorFacturas, "Facturas", new string[] { "Numero de Factura", "Numero de Reserva", "Numero de Cliente", "Nombre de Cliente", "Fecha de la Factura", "Hora de la Factura", "Ciudad de Ubicacion" });
+                            GestionarArreglo(facturas, ref contadorFacturas, "Facturas", new string[] { "Numero de Factura", "Numero de Reserva", "Numero de Cliente", "Nombre de Cliente", "Fecha de la Factura", "Hora de la Factura", "Codigo de la Factura" });
                             break;
                         case 6:
                             return;
@@ -162,6 +162,23 @@ namespace TAREA3_PROYECTO
                         continue;
                     }
                 }
+                else if (campos[i].Contains("Nombre") || campos[i].Contains("Apellido"))
+                {
+                    if (valor.Length < 1 || valor.Length > 10)
+                    {
+                        throw new ArgumentException("El nombre o apellido debe tener entre 1 y 10 caracteres.");
+                      
+                    }
+                }
+                else if (campos[i].Contains("Tipo"))
+                {
+                    string tipoValidado = valor.ToUpper();
+                    if (tipoValidado != "A" && tipoValidado != "B" && tipoValidado != "C")
+                    {
+                        throw new ArgumentException("El tipo debe ser A, B o C.");
+                    }
+                }
+
                 elemento[i] = valor;
             }
             arreglo[contador++] = elemento;
