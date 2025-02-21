@@ -128,59 +128,79 @@ namespace TAREA3_PROYECTO
             string[] elemento = new string[campos.Length];
             for (int i = 0; i < campos.Length; i++)
             {
-                WriteLine($"Ingrese el valor para {campos[i]}: ");
-                string valor = ReadLine();
-
-                if (campos[i].Contains("Numero"))
+                bool valorValido = false;
+                while (!valorValido)
                 {
-                    if (!esNumeroValido(valor))
-                    {
-                        WriteLine("Caracter no válido. Debe ingresar un número entero");
-                        i--;
-                        continue;
-                    }
+                    WriteLine($"Ingrese el valor para {campos[i]}: ");
+                    string valor = ReadLine();
 
-                }
-
-                if (campos[i].Contains("Fecha"))
-                {
-                    if (!EsFechaValida(valor))
+                    try
                     {
-                        WriteLine("Fecha no válida. Ingrese la fecha en el formato dd/mm/yyyy");
-                        i--;
-                        continue;
-                    }
+                        if (campos[i].Contains("Numero"))
+                        {
+                            if (!esNumeroValido(valor))
+                            {
+                                WriteLine("Caracter no válido. Debe ingresar un número entero.");
+                                continue;
+                            }
+                        }
 
-                }
-                else if (campos[i].Contains("Hora"))
-                {
+                        if (campos[i].Contains("Fecha"))
+                        {
+                            if (!EsFechaValida(valor))
+                            {
+                                WriteLine("Fecha no válida. Ingrese la fecha en el formato dd/mm/yyyy.");
+                                continue;
+                            }
+                        }
+                        else if (campos[i].Contains("Hora"))
+                        {
+                            if (!EsHoraValida(valor))
+                            {
+                                WriteLine("Hora no válida. Ingrese la hora en formato de 24 horas (hh:mm).");
+                                continue;
+                            }
+                        }
+                       
+                        else if (campos[i].Contains("Nombre") || campos[i].Contains("Apellido"))
+                        {
+                            if (valor.Length < 1 || valor.Length > 10)
+                            {
+                                throw new ArgumentException("El nombre o apellido debe tener entre 1 y 10 caracteres.");
+                            }
+                        }
+                        else if (campos[i].Contains("Ciudad") || campos[i].Contains("Cantidad") || campos[i].Contains("Capacidad"))
+                        {
+                            if (valor.Length < 1 || valor.Length > 15)
+                            {
+                                throw new ArgumentException("Los datos solicitados No pueden quedar vacios.");
+                            }
+                        }
 
-                    if (!EsHoraValida(valor))
-                    {
-                        WriteLine("Hora no válida. Ingrese la hora en formato de 24 horas (hh:mm)");
-                        i--;
-                        continue;
-                    }
-                }
-                else if (campos[i].Contains("Nombre") || campos[i].Contains("Apellido"))
-                {
-                    if (valor.Length < 1 || valor.Length > 10)
-                    {
-                        throw new ArgumentException("El nombre o apellido debe tener entre 1 y 10 caracteres.");
-                      
-                    }
-                }
-                else if (campos[i].Contains("Tipo"))
-                {
-                    string tipoValidado = valor.ToUpper();
-                    if (tipoValidado != "A" && tipoValidado != "B" && tipoValidado != "C")
-                    {
-                        throw new ArgumentException("El tipo debe ser A, B o C.");
-                    }
-                }
+                        else if (campos[i].Contains("Tipo"))
+                        {
+                            string tipoValidado = valor.ToUpper(); 
+                            if (tipoValidado != "A" && tipoValidado != "B" && tipoValidado != "C")
+                            {
+                                throw new ArgumentException("El tipo debe ser A, B o C.");
+                            }
+                        }
 
-                elemento[i] = valor;
+                     
+                        elemento[i] = valor;
+                        valorValido = true; 
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        WriteLine($"Error: {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLine($"Error inesperado: {ex.Message}");
+                    }
+                }
             }
+
             arreglo[contador++] = elemento;
             WriteLine("Elemento agregado correctamente");
         }
